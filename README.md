@@ -7,6 +7,7 @@
 ## INSTALL
 ```
 npm install migi-es6-shim
+```
 
 # License
 [MIT License]
