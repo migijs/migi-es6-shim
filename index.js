@@ -90,6 +90,27 @@ var ES = {
     }
     return func;
   },
+  IteratorClose: function (iterator, completionIsThrow) {
+    var returnMethod = ES.GetMethod(iterator, 'return');
+    if (returnMethod === void 0) {
+      return;
+    }
+    var innerResult, innerException;
+    try {
+      innerResult = ES.Call(returnMethod, iterator);
+    } catch (e) {
+      innerException = e;
+    }
+    if (completionIsThrow) {
+      return;
+    }
+    if (innerException) {
+      throw innerException;
+    }
+    if (!ES.TypeIsObject(innerResult)) {
+      throw new TypeError("Iterator's return method returned a non-object.");
+    }
+  },
   IteratorNext: function (it) {
     var result = arguments.length > 1 ? it.next(arguments[1]) : it.next();
     if (!ES.TypeIsObject(result)) {
