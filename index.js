@@ -265,4 +265,4 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
 defineProperties(Number, {
   MAX_SAFE_INTEGER: maxSafeInteger,
   MIN_SAFE_INTEGER: -maxSafeInteger
-};
+});
