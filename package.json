@@ -1,0 +1,38 @@
+{
+  "name": "migi-es6-shim",
+  "version": "0.34.0",
+  "description": "minify es6-shim for migi",
+  "maintainers": [
+    {
+      "name": "army8735",
+      "email": "army8735@qq.com"
+    }
+  ],
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/migijs/migi-es6-shim.git"
+  },
+  "keywords": [
+    "javascript",
+    "es6-shim"
+  ],
+  "author": "army8735",
+  "license": "MIT",
+  "dependencies": {
+    "es6-shim": "*"
+  },
+  "main": "./index",
+  "engines": {
+    "node": ">= 4.2"
+  },
+  "spm": {
+    "main": "./index.js",
+    "output": [
+      "./index.js"
+    ]
+  },
+  "readmeFilename": "README.md"
+}
