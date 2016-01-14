@@ -42,9 +42,6 @@ var ES = {
     }
     return func;
   },
-  ToObject: function (o, optMessage) {
-    return Object(ES.RequireObjectCoercible(o, optMessage));
-  },
   RequireObjectCoercible: function (x, optMessage) {
     /* jshint eqnull:true */
     if (x == null) {
@@ -57,6 +54,12 @@ var ES = {
     if (len <= 0) { return 0; } // includes converting -0 to +0
     if (len > Number.MAX_SAFE_INTEGER) { return Number.MAX_SAFE_INTEGER; }
     return len;
+  },
+  ToNumber: function (value) {
+    if (_toString(value) === '[object Symbol]') {
+      throw new TypeError('Cannot convert a Symbol value to a number');
+    }
+    return +value;
   },
   ToInteger: function (value) {
     var number = ES.ToNumber(value);
@@ -79,16 +82,6 @@ var ES = {
       throw new TypeError('bad iterator');
     }
     return it;
-  },
-  GetMethod: function (o, p) {
-    var func = ES.ToObject(o)[p];
-    if (func === void 0 || func === null) {
-      return void 0;
-    }
-    if (!ES.IsCallable(func)) {
-      throw new TypeError('Method not callable: ' + p);
-    }
-    return func;
   },
   IteratorClose: function (iterator, completionIsThrow) {
     var returnMethod = ES.GetMethod(iterator, 'return');
@@ -177,7 +170,7 @@ if (globals.Set && typeof new globals.Set()['@@iterator'] === 'function') {
 
 function isArguments(value) {
   return _toString(value) === '[object Arguments]';
-};
+}
 
 var ArrayShims = {
   from: function from(items) {
